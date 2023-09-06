@@ -11,9 +11,9 @@ public class ClientEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id = 0;
     private String name = "";
-    @OneToMany(mappedBy = "client")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "client")
     private List<PhoneEntity> phones;
-    @OneToMany(mappedBy = "client")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "client")
     private List<EmailEntity> emails;
 
     public ClientEntity() {
