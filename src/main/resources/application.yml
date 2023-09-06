@@ -1,7 +1,7 @@
 spring:
   datasource:
     driverClassName: org.h2.Driver
-    url: jdbc:h2:file:./db/cac;
+    url: jdbc:h2:file:./src/main/resources/db/cac;
     username: sa
     password: ""
   jpa:
