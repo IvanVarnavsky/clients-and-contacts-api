@@ -1,5 +1,10 @@
 package ru.unibell.clientsandcontactsapi.dto;
 
+import ru.unibell.clientsandcontactsapi.entity.ClientEntity;
+import ru.unibell.clientsandcontactsapi.entity.PhoneEntity;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class PhoneDto {
@@ -32,5 +37,13 @@ public class PhoneDto {
     @Override
     public int hashCode() {
         return Objects.hash(number);
+    }
+
+    public static List<PhoneDto> getPhones(ClientEntity client) {
+        List<PhoneDto> phones = new ArrayList<>();;
+        for (PhoneEntity phone : client.getPhones()){
+            phones.add(new PhoneDto(phone.getNumber()));
+        }
+        return phones;
     }
 }

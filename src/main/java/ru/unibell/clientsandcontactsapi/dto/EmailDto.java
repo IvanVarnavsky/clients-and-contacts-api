@@ -1,5 +1,10 @@
 package ru.unibell.clientsandcontactsapi.dto;
 
+import ru.unibell.clientsandcontactsapi.entity.ClientEntity;
+import ru.unibell.clientsandcontactsapi.entity.EmailEntity;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class EmailDto {
@@ -32,5 +37,13 @@ public class EmailDto {
     @Override
     public int hashCode() {
         return Objects.hash(address);
+    }
+
+    public static List<EmailDto> getEmails(ClientEntity client) {
+        List<EmailDto> emails = new ArrayList<>();;
+        for (EmailEntity email : client.getEmails()){
+            emails.add(new EmailDto(email.getAddress()));
+        }
+        return emails;
     }
 }
