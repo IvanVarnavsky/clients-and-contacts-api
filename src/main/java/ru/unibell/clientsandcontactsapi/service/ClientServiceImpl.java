@@ -7,6 +7,7 @@ import ru.unibell.clientsandcontactsapi.dto.ContactDto;
 import ru.unibell.clientsandcontactsapi.dto.EmailDto;
 import ru.unibell.clientsandcontactsapi.dto.PhoneDto;
 import ru.unibell.clientsandcontactsapi.entity.ClientEntity;
+import ru.unibell.clientsandcontactsapi.exception.ClientNotFoundException;
 import ru.unibell.clientsandcontactsapi.repository.ClientRepository;
 
 import java.util.ArrayList;
@@ -35,7 +36,7 @@ public class ClientServiceImpl implements ClientService {
             return new ClientDto(client.getId(), client.getName(), PhoneDto.getPhones(client), EmailDto.getEmails(client));
         }
         else
-            throw new RuntimeException("Client not found");
+            throw new ClientNotFoundException(id);
     }
 
     @Override
@@ -51,7 +52,7 @@ public class ClientServiceImpl implements ClientService {
             clientRepository.save(client);
         }
         else
-            throw new RuntimeException("Client not found");
+            throw new ClientNotFoundException(id);
     }
 
     @Override
@@ -60,7 +61,7 @@ public class ClientServiceImpl implements ClientService {
             clientRepository.deleteById(id);
         }
         else
-            throw new RuntimeException("Client not found");
+            throw new ClientNotFoundException(id);
     }
 
     @Override
@@ -70,7 +71,7 @@ public class ClientServiceImpl implements ClientService {
             return new ContactDto(PhoneDto.getPhones(client), EmailDto.getEmails(client));
         }
         else
-            throw new RuntimeException("Client not found");
+            throw new ClientNotFoundException(id);
     }
 
 }

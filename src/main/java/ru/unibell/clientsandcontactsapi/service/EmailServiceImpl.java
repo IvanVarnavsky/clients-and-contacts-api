@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import ru.unibell.clientsandcontactsapi.dto.EmailDto;
 import ru.unibell.clientsandcontactsapi.entity.ClientEntity;
 import ru.unibell.clientsandcontactsapi.entity.EmailEntity;
+import ru.unibell.clientsandcontactsapi.exception.ClientNotFoundException;
 import ru.unibell.clientsandcontactsapi.repository.ClientRepository;
 import ru.unibell.clientsandcontactsapi.repository.EmailRepository;
 
@@ -24,7 +25,7 @@ public class EmailServiceImpl implements EmailService {
             return EmailDto.getEmails(client);
         }
         else
-            throw new RuntimeException("Client not found");
+            throw new ClientNotFoundException(id);
     }
 
     @Override
@@ -34,7 +35,7 @@ public class EmailServiceImpl implements EmailService {
             return emailRepository.save(new EmailEntity(dto.getAddress(), client)).getId();
         }
         else
-            throw new RuntimeException("Client not found");
+            throw new ClientNotFoundException(id);
     }
 
 }

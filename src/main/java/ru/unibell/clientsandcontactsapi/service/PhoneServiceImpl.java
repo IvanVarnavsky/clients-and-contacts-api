@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import ru.unibell.clientsandcontactsapi.dto.PhoneDto;
 import ru.unibell.clientsandcontactsapi.entity.ClientEntity;
 import ru.unibell.clientsandcontactsapi.entity.PhoneEntity;
+import ru.unibell.clientsandcontactsapi.exception.ClientNotFoundException;
 import ru.unibell.clientsandcontactsapi.repository.ClientRepository;
 import ru.unibell.clientsandcontactsapi.repository.PhoneRepository;
 
@@ -24,7 +25,7 @@ public class PhoneServiceImpl implements PhoneService {
             return PhoneDto.getPhones(client);
         }
         else
-            throw new RuntimeException("Client not found");
+            throw new ClientNotFoundException(id);
     }
 
     @Override
@@ -34,7 +35,7 @@ public class PhoneServiceImpl implements PhoneService {
             return phoneRepository.save(new PhoneEntity(dto.getNumber(), client)).getId();
         }
         else
-            throw new RuntimeException("Client not found");
+            throw new ClientNotFoundException(id);
     }
 
 }
